@@ -8,6 +8,8 @@ Navigation::Navigation(int round_n, Movement& move)
 	//IntersectionStart intersectionStart = IntersectionStart(movement, "Test Intersection");
 	//currentState = &intersectionStart.getStateA()[Intersection::To];
 	gameboard = &Gameboard(round_n, movement); //create gameboard
+	//IntersectionStart* start = new IntersectionStart(movement, "test intersection");
+	//currentState = &start->getStateA()[Intersection::To];//gameboard->getStartState(); //set current state as start state
 	currentState = gameboard->getStartState(); //set current state as start state
 }
 
@@ -18,22 +20,62 @@ Navigation::~Navigation()
 
 bool Navigation::turnLeft()
 {
-	return false;
+	// attempt to turn left and get new state
+	IntersectionState* newState = currentState->turnLeft();
+	// if new state is a null pointer, then we can't go left so return false
+	if (!newState) {
+		return false;
+	}
+	// otherwise, current state became the new state and return true
+	else {
+		currentState = newState;
+		return true;
+	}
 }
 
 bool Navigation::turnRight()
 {
-	return false;
+	// attempt to turn right and get new state
+	IntersectionState* newState = currentState->turnRight();
+	// if new state is a null pointer, then we can't go right so return false
+	if (!newState) {
+		return false;
+	}
+	// otherwise, current state became the new state and return true
+	else {
+		currentState = newState;
+		return true;
+	}
 }
 
 bool Navigation::goForward()
 {
-	return false;
+	// attempt to go forward and get new state
+	IntersectionState* newState = currentState->goForward();
+	// if new state is a null pointer, then we can't go forward so return false
+	if (!newState) {
+		return false;
+	}
+	// otherwise, current state became the new state and return true
+	else {
+		currentState = newState;
+		return true;
+	}
 }
 
 bool Navigation::goBackward()
 {
-	return false;
+	// attempt to go backward and get new state
+	IntersectionState* newState = currentState->goBackward();
+	// if new state is a null pointer, then we can't go backward so return false
+	if (!newState) {
+		return false;
+	}
+	// otherwise, current state became the new state and return true
+	else {
+		currentState = newState;
+		return true;
+	}
 }
 
 string Navigation::getCurrentStateInfo()

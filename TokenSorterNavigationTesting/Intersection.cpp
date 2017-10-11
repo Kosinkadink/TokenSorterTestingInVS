@@ -5,25 +5,25 @@ using namespace moveOptions;
 
 Intersection::Intersection(Movement* move, string name)
 {
-	stateA[To] = &IntersectionState(move, this, "A[To]");
-	stateA[From] = &IntersectionState(move, this, "A[From]");
-	stateB[To] = &IntersectionState(move, this, "B[To]");
-	stateB[From] = &IntersectionState(move, this, "B[From]");
-	stateC[To] = &IntersectionState(move, this, "C[To]");
-	stateC[From] = &IntersectionState(move, this, "C[From]");
-	stateD[To] = &IntersectionState(move, this, "D[To]");
-	stateD[From] = &IntersectionState(move, this, "D[From]");
+	stateA[To] = new IntersectionState(move, this, "A[To]");
+	stateA[From] = new IntersectionState(move, this, "A[From]");
+	stateB[To] = new IntersectionState(move, this, "B[To]");
+	stateB[From] = new IntersectionState(move, this, "B[From]");
+	stateC[To] = new IntersectionState(move, this, "C[To]");
+	stateC[From] = new IntersectionState(move, this, "C[From]");
+	stateD[To] = new IntersectionState(move, this, "D[To]");
+	stateD[From] = new IntersectionState(move, this, "D[From]");
 	movement = move;
 	intersectName = name;
 }
 
-void Intersection::createConnection(IntersectionState localStateArr[], IntersectionState externalStateArr[]) {
+void Intersection::createConnection(IntersectionState* localStateArr, IntersectionState* externalStateArr) {
 	// create a bidirectional connection between To and From versions of given ItersectionStates
 	localStateArr[To].connectTo(externalStateArr[From]);
 	externalStateArr[To].connectTo(localStateArr[From]);
 }
 
-void Intersection::createBackwardConnection(IntersectionState localStateArr[], IntersectionState dropStateArr[]) {
+void Intersection::createBackwardConnection(IntersectionState* localStateArr, IntersectionState* dropStateArr) {
 	// create a regular forward connection, but special backward connection
 	localStateArr[To].connectTo(dropStateArr[From]);
 	dropStateArr[From].connectBackwardTo(localStateArr[To]);

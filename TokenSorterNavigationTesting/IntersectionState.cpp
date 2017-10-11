@@ -7,6 +7,15 @@ IntersectionState::IntersectionState(Movement* move, Intersection* intersection,
 	movement = move; container = intersection; stateName = name;
 }
 
+void IntersectionState::connectTo(IntersectionState& state) {
+	// creates one-way link
+	connectedState = &state;
+};
+void IntersectionState::connectBackwardTo(IntersectionState& state) {
+	// create one-way link
+	backwardConnectedState = &state;
+};
+
 IntersectionState* IntersectionState::performApproach() {
 	// check if approach was set
 	if (!approachEnum) {
@@ -43,7 +52,7 @@ IntersectionState* IntersectionState::performBackwardApproach() {
 
 
 string IntersectionState::getFullName() {
-	return "Intersection " + container->getName() + "in state " + getName();
+	return "Intersection |" + container->getName() + "| in state " + getName();
 }
 
 IntersectionState* IntersectionState::turnLeft() {

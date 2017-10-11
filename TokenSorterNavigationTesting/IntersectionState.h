@@ -23,10 +23,8 @@ private:
 	IntersectionState* backwardTransitionState = nullptr;
 	Intersection* container = nullptr;
 protected:
-	IntersectionState* connectedState = nullptr;
-	IntersectionState* backwardConnectedState = nullptr;
+	
 public:
-	IntersectionState() {};
 	IntersectionState(Movement* move, Intersection* intersection, string name);
 	// setters
 	void setLeftTurn(Turn enumVal, IntersectionState* state) { leftTurnEnum = enumVal; leftState = state; };
@@ -39,9 +37,12 @@ public:
 	// getters
 	string getName() { return stateName; };
 	string getFullName();
+	IntersectionState* getSelf() { return this; };
 	// other functions
-	void connectTo(IntersectionState& state) { connectedState = &state; }; // creates one-way link
-	void connectBackwardTo(IntersectionState& state) { backwardConnectedState = &state; }; // create one-way link
+	IntersectionState* connectedState = nullptr;
+	IntersectionState* backwardConnectedState = nullptr;
+	void connectTo(IntersectionState& state); // creates one-way link
+	void connectBackwardTo(IntersectionState& state); // create one-way link
 	IntersectionState* turnLeft();
 	IntersectionState* turnRight();
 	IntersectionState* goForward();
