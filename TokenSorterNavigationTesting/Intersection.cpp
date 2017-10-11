@@ -60,7 +60,7 @@ void Intersection::createConnection(IntersectionStatePair* localStateArr, Inters
 void Intersection::createBackwardConnection(IntersectionStatePair* localStateArr, IntersectionStatePair* dropStateArr) {
 	// create a regular forward connection, but special backward connection
 	localStateArr->To -> connectTo(*dropStateArr->From);
-	dropStateArr->From -> connectBackwardTo(*localStateArr->To);
+	dropStateArr->To -> connectBackwardTo(*localStateArr->From);
 }
 
 
@@ -119,19 +119,19 @@ IntersectionI::IntersectionI(Movement* move, string name) : Intersection(move, n
 	stateA->From -> setApproach(FollowUntilTokenSlot);
 	stateA->From -> setBackwardApproach(BackwardFollowUntilSeparatingY);
 	// setup states To/From B
-	stateB->To -> setLeftTurn(Left90, stateC->To);
-	stateB->To -> setRightTurn(Right90, stateA->To);
+	stateB->To -> setLeftTurn(Left45, stateC->To);
+	stateB->To -> setRightTurn(Right135, stateA->To);
 	stateB->From -> setLeftTurn(Left45, stateA->To);
 	stateB->From -> setRightTurn(Right90, stateD->To);
 	stateB->From -> setApproach(FollowUntilTokenSlot);
 	// setup states To/From C
-	stateC->To -> setLeftTurn(Left90, stateD->To);
-	stateC->To -> setRightTurn(Right90, stateB->To);
+	stateC->To -> setLeftTurn(Left45, stateD->To);
+	stateC->To -> setRightTurn(Right45, stateB->To);
 	stateC->From -> setApproach(FollowUntilTokenSlot);
 	stateC->From -> setBackwardApproach(BackwardFollowUntilCrossingY);
 	// setup states To/From D
-	stateD->To -> setLeftTurn(Left90, stateA->To);
-	stateD->To -> setRightTurn(Right90, stateC->To);
+	stateD->To -> setLeftTurn(Left135, stateA->To);
+	stateD->To -> setRightTurn(Right45, stateC->To);
 	stateD->From -> setLeftTurn(Left90, stateB->To);
 	stateD->From -> setRightTurn(Right45, stateA->To);
 	stateD->From -> setApproach(FollowUntilTokenSlot);
@@ -200,19 +200,21 @@ IntersectionIII::IntersectionIII(Movement* move, string name) : Intersection(mov
 	stateA->To -> setLeftTurn(Left135, stateB->To);
 	stateA->To -> setRightTurn(Right135, stateD->To);
 	stateA->From -> setApproach(FollowUntilSeparatingY);
+	//stateC->To -> setBackwardApproach(BackwardLeaveDropPosition);
 	// setup states To/From B
-	stateB->To -> setLeftTurn(Left90, stateC->To);
-	stateB->To -> setRightTurn(Right90, stateA->To);
+	stateB->To -> setLeftTurn(Left45, stateC->To);
+	stateB->To -> setRightTurn(Right135, stateA->To);
 	stateB->From -> setLeftTurn(Left45, stateA->To);
 	stateB->From -> setRightTurn(Right90, stateD->To);
 	stateB->From -> setApproach(FollowOnLeftUntilCrossesLine);
 	// setup states To/From C
-	stateC->To -> setLeftTurn(Left90, stateD->To);
-	stateC->To -> setRightTurn(Right90, stateB->To);
+	stateC->To -> setLeftTurn(Left45, stateD->To);
+	stateC->To -> setRightTurn(Right45, stateB->To);
+	stateC->To -> setBackwardState(stateA->To);
 	stateC->From -> setBackwardApproach(BackwardLeaveDropPosition);
 	// setup states To/From D
-	stateD->To -> setLeftTurn(Left90, stateA->To);
-	stateD->To -> setRightTurn(Right90, stateC->To);
+	stateD->To -> setLeftTurn(Left135, stateA->To);
+	stateD->To -> setRightTurn(Right45, stateC->To);
 	stateD->From -> setLeftTurn(Left90, stateB->To);
 	stateD->From -> setRightTurn(Right45, stateA->To);
 	stateD->From -> setApproach(FollowOnRightUntilCrossesLine);
@@ -247,6 +249,8 @@ IntersectionIV::IntersectionIV(Movement* move, string name) : Intersection(move,
 	// setup state To C
 	stateC->To -> setLeftTurn(Left90, stateD->To);
 	stateC->To -> setRightTurn(Right90, stateB->To);
+	stateC->To -> setBackwardState(stateA->To);
+	stateC->From -> setBackwardApproach(BackwardLeaveDropPosition);
 	// setup state To D
 	stateD->To -> setLeftTurn(Left90, stateA->To);
 	stateD->To -> setRightTurn(Right90, stateC->To);
@@ -307,12 +311,15 @@ IntersectionDropToken::IntersectionDropToken(Movement* move, string name) : Inte
 
 
 
-	nothing
+	B
 
 	*/
-	// There is only 1 state A that matters here, everything else does not exist
+	// There are only 2 states A and B that matter here
 	// No turns allowed, can only go back to previous tate
 	// Transitions from A From to A To
 	stateA->From -> setApproach(MoveIntoDropPosition);
+	stateA->From -> setTransitionTo(stateB->To);
+	
+	stateB->To->setBackwardState(stateA->To);
 }
 

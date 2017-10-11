@@ -22,6 +22,7 @@ private:
 	IntersectionState* rightState = nullptr;
 	IntersectionState* transitionState = nullptr;
 	IntersectionState* backwardTransitionState = nullptr;
+	IntersectionState* backwardState = nullptr;
 	Intersection* container = nullptr;
 protected:
 	
@@ -33,6 +34,7 @@ public:
 	void setRightTurn(Turn enumVal, IntersectionState* state) { rightTurnEnum = enumVal; rightState = state; };
 	void setTransitionTo(IntersectionState* state) { transitionState = state; };
 	void setBackwardTransitionTo(IntersectionState* state) { backwardTransitionState = state; };
+	void setBackwardState(IntersectionState* state) { backwardState = state; };
 	void setApproach(Approach enumVal) { approachEnum = enumVal; };
 	void setBackwardApproach(BackwardApproach enumVal) { backwardApproachEnum = enumVal; };
 	void setContainer(Intersection* intersection) { container = intersection; };
