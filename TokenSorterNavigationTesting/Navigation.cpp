@@ -7,7 +7,7 @@ Navigation::Navigation(int round_n, Movement& move)
 	movement = &move; //save pointer
 	//IntersectionStart intersectionStart = IntersectionStart(movement, "Test Intersection");
 	//currentState = &intersectionStart.getStateA()[Intersection::To];
-	gameboard = &Gameboard(round_n, movement); //create gameboard
+	gameboard = new Gameboard(round_n, movement); //create gameboard
 	//IntersectionStart* start = new IntersectionStart(movement, "test intersection");
 	//currentState = &start->getStateA()[Intersection::To];//gameboard->getStartState(); //set current state as start state
 	currentState = gameboard->getStartState(); //set current state as start state

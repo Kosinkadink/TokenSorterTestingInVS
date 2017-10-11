@@ -5,13 +5,19 @@
 
 class IntersectionState;
 
+
+struct IntersectionStatePair {
+	IntersectionState* To;
+	IntersectionState* From;
+};
+
 class Intersection
 {
 protected:
-	IntersectionState* stateA[2];
-	IntersectionState* stateB[2];
-	IntersectionState* stateC[2];
-	IntersectionState* stateD[2];
+	IntersectionStatePair* stateA;
+	IntersectionStatePair* stateB;
+	IntersectionStatePair* stateC;
+	IntersectionStatePair* stateD;
 	string intersectName;
 	bool hasToken;
 	Movement* movement;
@@ -20,23 +26,23 @@ public:
 	~Intersection();
 
 	enum Direction { To = 0, From = 1 };
-	void createConnection(IntersectionState* localStateArr, IntersectionState* externalStateArr);
-	void createBackwardConnection(IntersectionState* localStateArr, IntersectionState* dropStateArr);
+	void createConnection(IntersectionStatePair* localStateArr, IntersectionStatePair* externalStateArr);
+	void createBackwardConnection(IntersectionStatePair* localStateArr, IntersectionStatePair* dropStateArr);
 	// shortcut functions to connect using certain states
-	void createConnectionUsingStateA(IntersectionState* externalStateArr) { createConnection(*stateA, externalStateArr); };
-	void createConnectionUsingStateB(IntersectionState* externalStateArr) { createConnection(*stateB, externalStateArr); };
-	void createConnectionUsingStateC(IntersectionState* externalStateArr) { createConnection(*stateC, externalStateArr); };
-	void createConnectionUsingStateD(IntersectionState* externalStateArr) { createConnection(*stateD, externalStateArr); };
-	void createBackwardConnectionUsingStateA(IntersectionState* dropStateArr) { createBackwardConnection(*stateA, dropStateArr); };
-	void createBackwardConnectionUsingStateB(IntersectionState* dropStateArr) { createBackwardConnection(*stateB, dropStateArr); };
-	void createBackwardConnectionUsingStateC(IntersectionState* dropStateArr) { createBackwardConnection(*stateC, dropStateArr); };
-	void createBackwardConnectionUsingStateD(IntersectionState* dropStateArr) { createBackwardConnection(*stateD, dropStateArr); };
+	void createConnectionUsingStateA(IntersectionStatePair* externalStateArr) { createConnection(stateA, externalStateArr); };
+	void createConnectionUsingStateB(IntersectionStatePair* externalStateArr) { createConnection(stateB, externalStateArr); };
+	void createConnectionUsingStateC(IntersectionStatePair* externalStateArr) { createConnection(stateC, externalStateArr); };
+	void createConnectionUsingStateD(IntersectionStatePair* externalStateArr) { createConnection(stateD, externalStateArr); };
+	void createBackwardConnectionUsingStateA(IntersectionStatePair* dropStateArr) { createBackwardConnection(stateA, dropStateArr); };
+	void createBackwardConnectionUsingStateB(IntersectionStatePair* dropStateArr) { createBackwardConnection(stateB, dropStateArr); };
+	void createBackwardConnectionUsingStateC(IntersectionStatePair* dropStateArr) { createBackwardConnection(stateC, dropStateArr); };
+	void createBackwardConnectionUsingStateD(IntersectionStatePair* dropStateArr) { createBackwardConnection(stateD, dropStateArr); };
 	// getters
 	string getName() { return intersectName; };
-	IntersectionState* getStateA() { return *stateA; };
-	IntersectionState* getStateB() { return *stateB; };
-	IntersectionState* getStateC() { return *stateC; };
-	IntersectionState* getStateD() { return *stateD; };
+	IntersectionStatePair* getStateA() { return stateA; };
+	IntersectionStatePair* getStateB() { return stateB; };
+	IntersectionStatePair* getStateC() { return stateC; };
+	IntersectionStatePair* getStateD() { return stateD; };
 };
 
 // Type Start intersection

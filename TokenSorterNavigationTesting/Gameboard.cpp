@@ -79,7 +79,6 @@ void Gameboard::initializeBoard() {
 
 	/* Connecting intersections within same squares */
 	// connect 1-foot square intersections together
-	at1and0->createConnection(at1and0->getStateB(), at1and45->getStateD());
 	at1and0->createConnectionUsingStateB(at1and45->getStateD());
 	at1and45->createConnectionUsingStateB(at1and135->getStateD());
 	at1and135->createConnectionUsingStateB(at1and180->getStateD());
@@ -177,7 +176,7 @@ void Gameboard::initializeBoard() {
 	atOuterand315->createBackwardConnectionUsingStateC(dropOuterand315->getStateA());
 
 	// set a start state for the gameboard (going "To" A from center)
-	startState = &dropOuterand270->getStateA()[Intersection::To];
+	startState = dropOuterand270->getStateA()->To;
 }
 
 

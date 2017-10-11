@@ -8,6 +8,7 @@ using namespace moveOptions;
 class Intersection;
 
 
+
 class IntersectionState
 {
 private:
@@ -25,6 +26,7 @@ private:
 protected:
 	
 public:
+	IntersectionState() {};
 	IntersectionState(Movement* move, Intersection* intersection, string name);
 	// setters
 	void setLeftTurn(Turn enumVal, IntersectionState* state) { leftTurnEnum = enumVal; leftState = state; };

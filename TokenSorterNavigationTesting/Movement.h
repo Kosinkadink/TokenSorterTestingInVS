@@ -3,16 +3,16 @@
 #include <iostream>
 
 namespace moveOptions {
-	enum Turn { Left45, Right45, Left90, Right90, Left135, Right135, Left180, Right180 };
+	enum Turn { Left45=1, Right45, Left90, Right90, Left135, Right135, Left180, Right180 };
 	enum Approach {
-		NoFollowUntilPerpendicularLine, FollowUntilPerpendicularLine, FollowUntilTokenSlot,
+		NoFollowUntilPerpendicularLine=1, FollowUntilPerpendicularLine, FollowUntilTokenSlot,
 		FollowOnLeftUntilPerpendicularLine, FollowOnRightUntilPerpendicularLine,
 		FollowOnLeftUntilCrossesLine, FollowOnRightUntilCrossesLine,
 		FollowUntilCrossingY, FollowUntilSeparatingY,
 		MoveIntoStart, MoveIntoDropPosition
 	};
 	enum BackwardApproach {
-		BackwardLeaveDropPosition,
+		BackwardLeaveDropPosition=1,
 		BackwardFollowUntilCrossingY, BackwardFollowUntilSeparatingY
 	};
 }
