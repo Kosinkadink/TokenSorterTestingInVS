@@ -13,7 +13,8 @@ namespace moveOptions {
 	};
 	enum BackwardApproach {
 		BackwardLeaveDropPosition=1,
-		BackwardFollowUntilCrossingY, BackwardFollowUntilSeparatingY
+		BackwardFollowUntilCrossingY, BackwardFollowUntilSeparatingY,
+		BackwardFollowUntilPerpendicularLine
 	};
 }
 
@@ -53,5 +54,6 @@ public:
 	void approachBackwardLeaveDropPosition() { cout << "Go backward some amount to leave drop position" << endl; };
 	void approachBackwardFollowUntilCrossingY() { cout << "Go backward until two lines of Y start to cross" << endl; };
 	void approachBackwardFollowUntilSeparatingY() { cout << "Go backward until two lines of Y start to separate" << endl; };
+	void approachBackwardFollowUntilPerpendicularLine() { cout << "Go backward until perpendicular line is hit" << endl; };
 };
 

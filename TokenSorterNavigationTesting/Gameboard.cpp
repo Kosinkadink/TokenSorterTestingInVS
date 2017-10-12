@@ -133,6 +133,14 @@ void Gameboard::initializeBoard() {
 	at1and180->createConnectionUsingStateA(at2and180->getStateC());
 	at1and225->createConnectionUsingStateA(at2and225->getStateC());
 	at1and315->createConnectionUsingStateA(at2and315->getStateC());
+	// **create backward connections
+	at2and0->createBackwardConnectionUsingStateC(at1and0->getStateA());
+	at2and45->createBackwardConnectionUsingStateC(at1and45->getStateA());
+	at2and135->createBackwardConnectionUsingStateC(at1and135->getStateA());
+	at2and180->createBackwardConnectionUsingStateC(at1and180->getStateA());
+	at2and225->createBackwardConnectionUsingStateC(at1and225->getStateA());
+	at2and315->createBackwardConnectionUsingStateC(at1and315->getStateA());
+
 	// **connect 2-foot square to 3-foot square
 	at2and0->createConnectionUsingStateA(at3and0->getStateC());
 	at2and45->createConnectionUsingStateA(at3and45->getStateC());

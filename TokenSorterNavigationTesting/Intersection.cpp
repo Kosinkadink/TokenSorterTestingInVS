@@ -23,33 +23,6 @@ Intersection::Intersection(Movement* move, string name)
 	intersectName = name;
 }
 
-/*IntersectionStatePair* Intersection::getStateA() {
-	IntersectionStatePair* pair = new IntersectionStatePair;
-	pair->To = stateA[To];
-	pair->From = stateA[From];
-	return pair;
-}
-
-IntersectionStatePair* Intersection::getStateB() {
-	IntersectionStatePair* pair = new IntersectionStatePair;
-	pair->To = stateB[To];
-	pair->From = stateB[From];
-	return pair;
-}
-
-IntersectionStatePair* Intersection::getStateC() {
-	IntersectionStatePair* pair = new IntersectionStatePair;
-	pair->To = stateC[To];
-	pair->From = stateC[From];
-	return pair;
-}
-
-IntersectionStatePair* Intersection::getStateD() {
-	IntersectionStatePair* pair = new IntersectionStatePair;
-	pair->To = stateC[To];
-	pair->From = stateC[From];
-	return pair;
-}*/
 
 void Intersection::createConnection(IntersectionStatePair* localStateArr, IntersectionStatePair* externalStateArr) {
 	// create a bidirectional connection between To and From versions of given ItersectionStates
@@ -160,6 +133,7 @@ IntersectionII::IntersectionII(Movement* move, string name) : Intersection(move,
 	stateA->To -> setLeftTurn(Left90, stateB->To);
 	stateA->To -> setRightTurn(Right90, stateD->To);
 	stateA->From -> setApproach(FollowUntilTokenSlot);
+	stateA->From -> setBackwardApproach(BackwardFollowUntilPerpendicularLine);
 	// setup state To B
 	stateB->To -> setLeftTurn(Left90, stateC->To);
 	stateB->To -> setRightTurn(Right90, stateA->To);
@@ -168,6 +142,7 @@ IntersectionII::IntersectionII(Movement* move, string name) : Intersection(move,
 	stateC->To -> setLeftTurn(Left90, stateD->To);
 	stateC->To -> setRightTurn(Right90, stateB->To);
 	stateC->From -> setApproach(FollowUntilTokenSlot);
+	stateC->From -> setBackwardApproach(BackwardFollowUntilPerpendicularLine);
 	// setup state To D
 	stateD->To -> setLeftTurn(Left90, stateA->To);
 	stateD->To -> setRightTurn(Right90, stateC->To);
@@ -200,7 +175,6 @@ IntersectionIII::IntersectionIII(Movement* move, string name) : Intersection(mov
 	stateA->To -> setLeftTurn(Left135, stateB->To);
 	stateA->To -> setRightTurn(Right135, stateD->To);
 	stateA->From -> setApproach(FollowUntilSeparatingY);
-	//stateC->To -> setBackwardApproach(BackwardLeaveDropPosition);
 	// setup states To/From B
 	stateB->To -> setLeftTurn(Left45, stateC->To);
 	stateB->To -> setRightTurn(Right135, stateA->To);

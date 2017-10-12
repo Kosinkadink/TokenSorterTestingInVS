@@ -88,8 +88,8 @@ IntersectionState* IntersectionState::goForward() {
 
 
 IntersectionState* IntersectionState::goBackward() {
-	// if there does not exist a forward connected state, return null ptr
-	if (!backwardState) {
+	// if there does not exist a backward state or the backward state doesn't have a backward connected state, return null ptr
+	if (!backwardState || !backwardState->backwardConnectedState) {
 		return nullptr;
 	}
 	// otherwise, ask the node to perform movement, return new state

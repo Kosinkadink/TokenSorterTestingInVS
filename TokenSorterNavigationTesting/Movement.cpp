@@ -98,6 +98,9 @@ void Movement::performBackwardApproach(BackwardApproach approachType) {
 	case BackwardFollowUntilSeparatingY:
 		approachBackwardFollowUntilSeparatingY();
 		break;
+	case BackwardFollowUntilPerpendicularLine:
+		approachBackwardFollowUntilPerpendicularLine();
+		break;
 	default:
 		cout << "Backward approach type does not exist" << endl;
 		break;
